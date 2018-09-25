@@ -120,10 +120,10 @@ class ServerThread implements Runnable {
         this.queueProducer = queueProducer;
     }
 
-    public static final String bytesToHexString(byte[] bArray) {
-        StringBuffer sb = new StringBuffer(bArray.length);
+    public static final String bytesToHexString(byte[] bArray,int length) {
+        StringBuffer sb = new StringBuffer(length);
         String sTemp;
-        for (int i = 0; i < bArray.length; i++) {
+        for (int i = 0; i < length; i++) {
             sTemp = Integer.toHexString(0xFF & bArray[i]);
             if (sTemp.length() < 2)
                 sb.append(0);
@@ -187,8 +187,8 @@ class ServerThread implements Runnable {
                 if (len != -1) {
                     String msg = new String(buf, 0, len);
                     if (!msg.equals("test")) {
-                        String m = bytesToHexString(buf);
-                        queueProducer.doSend(m);
+                        String m = bytesToHexString(buf,len);
+                        queueProducer.doSend(name+"#"+m);
                         Server.sframe.jtaChat.append(uid + "Say:" + m + "\n");
                     }
                 }
