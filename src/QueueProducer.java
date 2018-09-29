@@ -24,7 +24,7 @@ public class QueueProducer {
 	/** 默认连接地址（格式如：tcp://IP:61616） */
 	public static final String BROKER_URL = ActiveMQConnection.DEFAULT_BROKER_URL;
 	/** 队列名称 */
-	public static final String QUEUE_NAME = "hello amq";
+	public static final String QUEUE_NAME = "device1";
 
 	// 连接工厂（在AMQ中由ActiveMQConnectionFactory实现）
 	private ConnectionFactory connectionFactory;
