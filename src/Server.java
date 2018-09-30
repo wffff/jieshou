@@ -109,6 +109,7 @@ class ServerThread implements Runnable {
     String name = null;
     QueueProducer queueProducer = null;
 
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public ServerThread(Socket s, ServerSocket ss, String ip, int port, String name, QueueProducer queueProducer) {
         this.s = s;
@@ -120,7 +121,7 @@ class ServerThread implements Runnable {
         this.queueProducer = queueProducer;
     }
 
-    public static final String bytesToHexString(byte[] bArray,int length) {
+    public static final String bytesToHexString(byte[] bArray, int length) {
         StringBuffer sb = new StringBuffer(length);
         String sTemp;
         for (int i = 0; i < length; i++) {
@@ -187,9 +188,10 @@ class ServerThread implements Runnable {
                 if (len != -1) {
                     String msg = new String(buf, 0, len);
                     if (!msg.equals("test")) {
-                        String m = bytesToHexString(buf,len);
-                        queueProducer.doSend(name+"#"+m);
-                        Server.sframe.jtaChat.append(uid + "Say:" + m + "\n");
+                        String m = bytesToHexString(buf, len);
+                        Date date = new Date();
+                        queueProducer.doSend(name + "#" + m + "%" + df.format(date));
+                        Server.sframe.jtaChat.append(uid + "Say:" + m +df.format(date)+ "\n");
                     }
                 }
             }
